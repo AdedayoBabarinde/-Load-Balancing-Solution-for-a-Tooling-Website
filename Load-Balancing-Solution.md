@@ -1,12 +1,12 @@
 
 **Network Information**
 
-Web Server1 192.168.1.223
-Web Server2 192.168.1.130
-Web Server3 192.168.1.294
-NFS Server 192.168.1.131
-Load Balancer 192.168.1.128
-MySQL Server 192.168.1.132
+- Web Server1 192.168.1.223
+- Web Server2 192.168.1.130
+- Web Server3 192.168.1.294
+- NFS Server 192.168.1.131
+- Load Balancer 192.168.1.128
+- MySQL Server 192.168.1.132
 
 
 
@@ -16,7 +16,7 @@ I identified the name of the ethernet interface you want to configure
 
 ```ip a```
 
-![](enp0s8.png)
+![](https://github.com/drazen-dee28/-Load-Balancing-Solution-for-a-Tooling-Website/blob/main/images/enp0s8.png)
 
 
 
@@ -24,7 +24,7 @@ I opened the Netplan configuration files  stored in the /etc/netplan directory o
 
 ```sudo nano /etc/netplan```
 
-![](netplan.png)
+![](https://github.com/drazen-dee28/-Load-Balancing-Solution-for-a-Tooling-Website/blob/main/images/netplan.png)
 
 
 
@@ -33,7 +33,7 @@ I opened the Netplan configuration files  stored in the /etc/netplan directory o
 To configure the static IP, copy and paste the configuration in to the yaml config
 
 ```sudo nano /etc/netplan/01-network-manager-all.yaml```
-![](yaml.png)
+![](https://github.com/drazen-dee28/-Load-Balancing-Solution-for-a-Tooling-Website/blob/main/images/yaml.png)
 
 I saved the file and run the netplan command below to effect the changes
 
@@ -44,4 +44,4 @@ I saved the file and run the netplan command below to effect the changes
 
 Edit the hosts file on the load balancer as follows and do the same on the webservers as shown below:
 
-![](hosts.png)
+![](https://github.com/drazen-dee28/-Load-Balancing-Solution-for-a-Tooling-Website/blob/main/images/hosts.png)
