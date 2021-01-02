@@ -51,7 +51,7 @@ Edit the hosts file on the load balancer as follows and do the same on the webse
 
 I use ping command to check if the load balancer can communicate with the webservers
 
-![](check.png)
+![](https://github.com/drazen-dee28/-Load-Balancing-Solution-for-a-Tooling-Website/blob/main/images/check.png)
 
 
 
@@ -78,7 +78,7 @@ I  installed HAproxy using the following command in Terminal:
 
 I edited the /etc/haproxy/haproxy.cfg file by appending the following lines in the haproxy.cfg file replacing the IP addresses as shown below:
 
-![](loadbalancer.jpg)
+![](https://github.com/drazen-dee28/-Load-Balancing-Solution-for-a-Tooling-Website/blob/main/images/loadbalancer.jpg)
 
 
 
@@ -87,14 +87,14 @@ I configured HAproxy monitoring by enabling the HAproxy “stats” page and sec
 
 
 
-![](stats.jpg)
+![](https://github.com/drazen-dee28/-Load-Balancing-Solution-for-a-Tooling-Website/blob/main/images/stats.jpg)
 
 
 I verified the configuration file using the below command in Terminal:
 
 ```haproxy -c -f /etc/haproxy/haproxy.cfg```
 
-![](verification.jpg)
+![](https://github.com/drazen-dee28/-Load-Balancing-Solution-for-a-Tooling-Website/blob/main/images/verification.jpg)
 
 
 
