@@ -1,57 +1,42 @@
 
 **Network Information**
 
-- Client Web Server1 192.168.1.223
-- Client Web Server2 192.168.1.130
+- Client Web Server1 192.168.1.224
+- Client Web Server2 192.168.1.137
 - Client Web Server3 192.168.1.294
 - NFS Server 192.168.1.131
-- Load Balancer 192.168.1.122
+- Load Balancer 192.168.1.223
 - MySQL Server 192.168.1.132
 
 
 
 ** Local DNS Setup for the Load Balancer Using /etc/hosts File**
 
-I identified the name of the ethernet interface you want to configure
 
-```ip a```
+Setting static IP on the load balancer
 
-![](https://github.com/drazen-dee28/-Load-Balancing-Solution-for-a-Tooling-Website/blob/main/images/enp0s8.png)
+Edit /etc/sysconfig/network config file
 
+```sudo nano nano /etc/sysconfig/network```
 
+![](config.jpg)
 
-I opened the Netplan configuration files  stored in the /etc/netplan directory on the Load Balancer to reveal the YAML configuration file which i will use to configure the IP addresses of the web servers.
+Edit the coonfig file of the network interace being used 
 
-```sudo nano /etc/netplan```
+```sudo nano /etc/sysconfig/network-scripts/ifcfg-enp0s8sudo nano /etc/sysconfig/network-scripts/ifcfg-enp0s8```
 
-![](https://github.com/drazen-dee28/-Load-Balancing-Solution-for-a-Tooling-Website/blob/main/images/netplan.
-png)
-
-
-
-
-
-To configure the static IP, copy and paste the configuration in to the yaml config
-
-```sudo nano /etc/netplan/01-network-manager-all.yaml```
-![](https://github.com/drazen-dee28/-Load-Balancing-Solution-for-a-Tooling-Website/blob/main/images/yaml.png)
-
-I saved the file and run the netplan command below to effect the changes
-
-```sudo netplan apply```
-
-
+![](enp0s8.jpg)
 
 
 Edit the hosts file on the load balancer as follows and do the same on the webservers as shown below:
 
-![](https://github.com/drazen-dee28/-Load-Balancing-Solution-for-a-Tooling-Website/blob/main/images/hosts.png)
+![](https://github.com/drazen-dee28/-Load-Balancing-Solution-for-a-Tooling-Website/blob/main/images/hosts.jpg)
 
 
 
 I use ping command to check if the load balancer can communicate with the webservers
 
-![](https://github.com/drazen-dee28/-Load-Balancing-Solution-for-a-Tooling-Website/blob/main/images/check.png)
+![](https://github.com/drazen-dee28/-Load-Balancing-Solution-for-a-Tooling-Website/blob/main/images/ping.jpg)
 
 
 
