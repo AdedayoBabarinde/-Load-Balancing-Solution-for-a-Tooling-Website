@@ -1,11 +1,11 @@
 
 **Network Information**
 
-- Web Server1 192.168.1.223
-- Web Server2 192.168.1.130
-- Web Server3 192.168.1.294
+- Client Web Server1 192.168.1.223
+- Client Web Server2 192.168.1.130
+- Client Web Server3 192.168.1.294
 - NFS Server 192.168.1.131
-- Load Balancer 192.168.1.128
+- Load Balancer 192.168.1.122
 - MySQL Server 192.168.1.132
 
 
@@ -98,6 +98,18 @@ I verified the configuration file using the below command in Terminal:
 
 
 
-I applied the configurations, restarted the HAproxy service:
+I applied the configurations, restarted the HAproxy service: 
+```sudo systemctl restart haproxy.service```
+
+I got an error  ```failed to start haproxy load balancer``` so i disable and stopped Apache with
+
+sudo systemctl disable apache2 &  sudo systemctl stop apache2  ,i then restarted the HAproxy service
 
 ```sudo systemctl restart haproxy.service```
+
+
+Then i checked the status of HAproxy service
+
+ ```sudo systemctl status haproxy.service```
+
+ ![](status.png)
