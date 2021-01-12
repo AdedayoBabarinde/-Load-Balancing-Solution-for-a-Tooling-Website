@@ -15,18 +15,30 @@
 
 Setting static IP on the load balancer
 
-Edit /etc/sysconfig/network config file
 
-```sudo nano nano /etc/sysconfig/network```
+- Identify the network interface
+
+```ip addr``
+![](interface.png)
+
+
+Edit /etc/sysconfig/network config file by changing the BOOTPROTO option to ```none``` and configuring the IP, route prefix, gateway and dns server statically as shown below
+
+```sudo nano /etc/sysconfig/network-scripts/ifcfg-enp0s8```
 
 ![](config.jpg)
 
-Edit the coonfig file of the network interace being used 
 
-```sudo nano /etc/sysconfig/network-scripts/ifcfg-enp0s8sudo nano /etc/sysconfig/network-scripts/ifcfg-enp0s8```
 
-![](enp0s8.jpg)
+Save changes to network configurations.
+```sudo nmcli connection down enp0s8 && sudo nmcli connection up enp0s8```
 
+![](save.png)
+
+
+Verify the IP has changed
+```ip addr```
+![](ipchange.jpg)
 
 Edit the hosts file on the load balancer as follows and do the same on the webservers as shown below:
 
@@ -44,22 +56,50 @@ I use ping command to check if the load balancer can communicate with the webser
 
 Install Apache on the Load balancer
 
-```sudo apt install apache2```
+- Download the source code with the command below
 
+```wget http://www.haproxy.org/download/2.0/src/haproxy-2.0.7.tar.gz -O ~/haproxy.tar.gz```
 
+- Extract the files
 
-```Installing HAproxy load balancer```
+```tar xzvf ~/haproxy.tar.gz -C ~/```
 
-```sudo apt-get update```
+- Change into the extracted source directory.
 
+```cd ~/haproxy-2.0.7```
 
-I  installed HAproxy using the following command in Terminal:
+ - Compile the program
 
-```sudo sudo apt install haproxy```
+ ```make TARGET=linux-glibc```
+
+ - Install HAProxy
+
+ ```sudo make install```
+
 
 
 
 **Configuring HAproxy as a load balancer**
+
+
+- Add the following directories and the statistics file for HAProxy records.
+
+```sudo mkdir -p /etc/haproxy```
+```sudo mkdir -p /var/lib/haproxy```
+```sudo touch /var/lib/haproxy/stats```
+
+
+- Create a symbolic link to allow running of HAProxy commands as a normal user.
+
+```sudo ln -s /usr/local/sbin/haproxy /usr/sbin/haproxy```
+
+- I copied the haproxy.init file from the examples to /etc/init.d directory to add the proxy as a service to the system
+
+```sudo cp ~/haproxy-2.0.7/examples/haproxy.init /etc/init.d/haproxy```
+
+
+
+
 
 I edited the /etc/haproxy/haproxy.cfg file by appending the following lines in the haproxy.cfg file replacing the IP addresses as shown below:
 
@@ -86,7 +126,6 @@ I verified the configuration file using the below command in Terminal:
 I applied the configurations, restarted the HAproxy service: 
 ```sudo systemctl restart haproxy.service```
 
-I got an error  ```failed to start haproxy load balancer``` so i disable and stopped Apache with
 
 sudo systemctl disable apache2 &  sudo systemctl stop apache2  ,i then restarted the HAproxy service
 
