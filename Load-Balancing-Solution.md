@@ -1,12 +1,12 @@
 
 **Network Information**
 
-- Client Web Server1 192.168.1.223
-- Client Web Server2 192.168.1.122
-- Client Web Server3 192.168.1.249
-- NFS Server 192.168.1.131
-- Load Balancer 192.168.1.139
-- MySQL Server 192.168.1.132
+- Client Web Server1 192.168.1.223 - Centos 8
+- Client Web Server2 192.168.1.122 - Ubuntu 20.04
+- Client Web Server3 192.168.1.249 - Ubuntu 20.04
+- NFS Server 192.168.1.131         - Ubuntu 20.04
+- Load Balancer 192.168.1.139      - Centos 8 
+- MySQL Server 192.168.1.132       - Ubuntu 20.04
 
 
 
@@ -128,10 +128,6 @@ Install Apache on the Load balancer
 
 
 
-
-
-
-
 I edited the /etc/haproxy/haproxy.cfg file by appending the following lines in the haproxy.cfg file replacing the IP addresses as shown below:
 
 ![](https://github.com/drazen-dee28/-Load-Balancing-Solution-for-a-Tooling-Website/blob/main/images/cfg.jpg)
@@ -191,11 +187,26 @@ Configure static IP on the database server by edit the yaml config file as shown
 
 
 
-
-
-
-I checked the Apache access log file on the 3 webservers as follows:
+- I checked the Apache access log file on the 3 webservers as follows:
 
 ```sudo tail –f /var/log/httpd/access_log```
 
 ![](https://github.com/drazen-dee28/-Load-Balancing-Solution-for-a-Tooling-Website/blob/main/images/accessw1.jpg)
+
+- I repeated the procedure above for the remaining two webservers
+
+
+-I tested whether all the webservers are accessible through the load balancer’s DNS name
+
+![](https://github.com/drazen-dee28/-Load-Balancing-Solution-for-a-Tooling-Website/blob/main/images/accesslb.jpg)
+
+![](https://github.com/drazen-dee28/-Load-Balancing-Solution-for-a-Tooling-Website/blob/main/images/accesslb2.jpg)
+
+
+
+
+Credits: 
+
+[Linux Basics - Set a Static IP on Ubuntu](https://www.howtoforge.com/linux-basics-set-a-static-ip-on-ubuntu)
+[DevOps Career And Mentorship](www.darey.io)
+[How to install HAProxy load balancer on CentOS](https://upcloud.com/community/tutorials/haproxy-load-balancer-centos/)
